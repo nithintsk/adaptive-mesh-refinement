@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cp $PBS_O_WORKDIR/* $TMPDIR
+cd $TMPDIR
+touch dresults.txt
+for i in `ls testgrid*`; do echo -e "\n\n======================"; basename $i; echo "======================"; time ./disposable 0.02 0.02 8 < $i; done 2>&1 | tee dresults.txt;
+cp dresults.txt $PBS_O_WORKDIR

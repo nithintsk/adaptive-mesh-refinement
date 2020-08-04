@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cp $PBS_O_WORKDIR/* $TMPDIR
+cd $TMPDIR
+#for i in {1..28}; do echo -e "\n\n============ Total Num Threads $i ================"; time ./disposable 0.02 0.02 $i < testgrid_400_12206; done > dtresults.txt
+for i in {1..10}; do echo -e "\n\n============ Total Num Threads $i ================"; time ./disposable 0.02 0.02 $i < testgrid_400_12206; done 2>&1 | tee dtresults1-10.txt &
+for i in {11..15}; do echo -e "\n\n============ Total Num Threads $i ================"; time ./disposable 0.02 0.02 $i < testgrid_400_12206; done 2>&1 | tee dtresults11-15.txt &
+for i in {16..20}; do echo -e "\n\n============ Total Num Threads $i ================"; time ./disposable 0.02 0.02 $i < testgrid_400_12206; done 2>&1 | tee dtresults16-20.txt &
+for i in {21..25}; do echo -e "\n\n============ Total Num Threads $i ================"; time ./disposable 0.02 0.02 $i < testgrid_400_12206; done 2>&1 | tee dtresults21-25.txt &
+for i in {26..28}; do echo -e "\n\n============ Total Num Threads $i ================"; time ./disposable 0.02 0.02 $i < testgrid_400_12206; done 2>&1 | tee dtresults26-28.txt &
+cp dtresults.txt $PBS_O_WORKDIR
